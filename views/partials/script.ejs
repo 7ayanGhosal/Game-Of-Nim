@@ -60,7 +60,6 @@
          }, 2000);
     }
 
-
     var computer = function(){
         var values = [];
         //Remove CLICK event from other boxes
@@ -159,12 +158,12 @@
     var count = boxes.length;
     var gameOver = function(current){
         if(checkedOptimalSol){
-            gameover.innerHTML = "<h1>Sorry, you checked optimal sol.</h1>";
+            gameover.innerHTML = "<h1>You won but you should try out without checking optimal solutions</h1>";
         }else{
             if(current == 2)
                 gameover.innerHTML = "<h1>Game Over! You lose!!!</h1>";
             else
-                gameover.innerHTML = "<h1>Game Over! You Win!!!</h1>";
+                gameover.innerHTML = "<h1>Welldone! You Win!!!</h1>";
                 //gameover.innerHTML = "<h1>Game Over! Player "+current+" wins!!!</h1>"
         }
     }
