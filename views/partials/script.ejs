@@ -60,7 +60,7 @@
         
         //step 4
         var index = -1;
-        for(var i=0; i<boxes.length; i++){
+        for(var i=0; i<boxes.length && nimsum != 0; i++){
             if(values[i]&leftmostbit){
                 //leftmostbit is set
                 index = i;
@@ -73,7 +73,7 @@
                 if(values[i] != 0)
                     index = i;    
             }
-            var newValue = 0;    
+            var newValue = 0;   
         }
         //we have the index of the box to be changed
         
