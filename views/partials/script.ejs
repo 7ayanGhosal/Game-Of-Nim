@@ -17,9 +17,9 @@
                         if(value != 0){
                             placed = true;
                             value = value - 1;
-                            this.innerHTML = "<h1 class='w-100'>"+value+"</h1>";
+                            this.innerHTML = "<h1 class='box-value'>"+value+"</h1>";
                             for(var k=0; k < value; k++){
-                                this.innerHTML += "<img class='stones' src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsfvEXPd5ZHTRLwVbtw2MZ9T3Tzp37-Gy8i2dH8ZYqIRRAGcOD&usqp=CAU'>"
+                                this.innerHTML += "<img class='stones' src='https://pngimg.com/uploads/stone/stone_PNG13596.png'>"
                             }
                             if(value == 0){
                                 this.classList.add("zero");
@@ -46,9 +46,9 @@
         setTimeout(() => {  
             var index = optimalObj.index;
             var newValue = optimalObj.newValue;
-            boxes[index].innerHTML = "<h1 class='w-100'>"+newValue+"</h1>";
+            boxes[index].innerHTML = "<h1 class='box-value'>"+newValue+"</h1>";
             for(var k=0; k < newValue; k++){
-                boxes[index].innerHTML += "<img class='stones' src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsfvEXPd5ZHTRLwVbtw2MZ9T3Tzp37-Gy8i2dH8ZYqIRRAGcOD&usqp=CAU'>"
+                boxes[index].innerHTML += "<img class='stones' src='https://pngimg.com/uploads/stone/stone_PNG13596.png'>"
             }
             if(newValue == 0){
                 boxes[index].classList.add("zero");

@@ -3,14 +3,12 @@
         .stones{
             width: 50px;
             height: 50px;
-            border-radius: 50%;
             margin: 3px;
         }
         .box{
             width: 100%;
             padding: 5px;
             border-radius: 25px;
-            background-color: aqua;
         }
         .navbar-brand{
             font-size: 2rem;
@@ -25,14 +23,12 @@
         .stones{
             width: 30px;
             height: 30px;
-            border-radius: 50%;
             margin: 2px;
         }
         .box{
             width: 100%;
             padding: 5px;
             border-radius: 25px;
-            background-color: aqua;
         }
         .navbar-brand{
             font-size: 2rem;
@@ -43,36 +39,66 @@
         .stones{
             width: 80px;
             height: 80px;
-            border-radius: 50%;
             margin: 5px;
         }
         .box{
             width: 100%;
             min-width: 100px;
-            min-height: 20vh;
+            /* min-height: 20vh; */
             padding: 10px;
             border-radius: 25px;
-            background-color: aqua;
         }
         .navbar-brand{
             font-size: 3rem;
             font-weight: 800;
         }
     }
-    .container{
-        border-radius: 25px;
+    *{
+        font-family: 'Fira Sans', sans-serif;
+    }
+    body{
+        background-image: radial-gradient(circle,lightsteelblue, cyan,  deepskyblue, dodgerblue, mediumblue);
+    }
+    .bold{
+        font-weight: 800;
+    }
+    .navbar-brand{
+        font-family: 'Luckiest Guy', cursive;
+        font-weight: 400;
+        letter-spacing: 2px;
+        font-size: 4rem;
+    }
+    @media only screen and (max-width: 480px){
+        .navbar-brand{
+            font-size: 3rem;
+        }
+    }
+    .game-area{
+        background-color: papayawhip;
+    }
+    .box{
+        background-color: darkkhaki;
+    }
+    .box-value{
+        border: 1px solid black;
+        border-radius: 50%;
+        padding: 5px;
+        display: inline-block;
+        width:1.5em;
+        height:1.5em;
     }
     .disabled{
-        background-color: grey;
+        background-color: peachpuff;
     }
     .zero{
-        background-color: lightgrey;
+        background-color: peachpuff;
     }
     .player2{
         color: orange;
     }
     #gameOver{
         border-radius: 25px;
+        background-color: darkturquoise;
     }
     .icon{
         font-size: 2em;
