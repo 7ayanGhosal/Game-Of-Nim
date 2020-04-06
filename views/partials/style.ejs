@@ -1,25 +1,70 @@
 <style type="text/css">
+    @media only screen and (max-width: 767px) {
+        .stones{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 3px;
+        }
+        .box{
+            width: 100%;
+            padding: 5px;
+            border-radius: 25px;
+            background-color: aqua;
+        }
+        .navbar-brand{
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        h1,h2,h3,h4,p,a{
+            font-size: 1.4em;
+            font-weight: 400;
+        }
+    }
+    @media only screen and (max-width: 600px) {
+        .stones{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 2px;
+        }
+        .box{
+            width: 100%;
+            padding: 5px;
+            border-radius: 25px;
+            background-color: aqua;
+        }
+        .navbar-brand{
+            font-size: 2rem;
+            font-weight: 600;
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        .stones{
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 5px;
+        }
+        .box{
+            width: 100%;
+            min-width: 100px;
+            min-height: 20vh;
+            padding: 10px;
+            border-radius: 25px;
+            background-color: aqua;
+        }
+        .navbar-brand{
+            font-size: 3rem;
+            font-weight: 800;
+        }
+    }
     body{
-        margin-top: 100px;
         margin-bottom: 20px;
     }
-    .navbar-brand{
-        font-size: 3rem;
-        font-weight: 800;
-    }
+    
     .container{
         border-radius: 25px;
-    }
-    .box{
-        width: 100%;
-        min-width: 100px;
-        min-height: 20vh;
-        padding: 10px;
-        border-radius: 25px;
-        background-color: aqua;
-    }
-    .bg-yellow{
-        background-color: yellow;
     }
     .disabled{
         background-color: grey;
@@ -29,12 +74,6 @@
     }
     .player2{
         color: orange;
-    }
-    .stones{
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        margin: 5px;
     }
     #gameOver{
         border-radius: 25px;
