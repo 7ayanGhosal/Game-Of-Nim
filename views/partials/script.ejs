@@ -1,0 +1,150 @@
+<script>
+    var placed = false;
+    var currPlayer = 1;
+    var myfunction = function(){
+                        //Remove CLICK event from other boxes
+                        for(var j=0; j<boxes.length; j++){
+                            if(boxes[j] != this){
+                                boxes[j].removeEventListener('click',myfunction);
+                                boxes[j].classList.add("disabled");
+                            }
+                        }
+                        
+                        value = Number(this.textContent);
+                        
+                        if(value != 0){
+                            placed = true;
+                            value = value - 1;
+                            this.innerHTML = "<h1 class='w-100'>"+value+"</h1>";
+                            for(var k=0; k < value; k++){
+                                this.innerHTML += "<img class='stones' src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsfvEXPd5ZHTRLwVbtw2MZ9T3Tzp37-Gy8i2dH8ZYqIRRAGcOD&usqp=CAU'>"
+                            }
+                            if(value == 0){
+                                this.classList.add("zero");
+                                count = count-1;
+                                this.removeEventListener('click',myfunction);
+                                submit();
+                            }
+                        }
+                    }
+    var turn2 = function(){
+        //Remove the button
+        btn.removeEventListener('click', presubmit);
+        //Remove CLICK event from other boxes
+        for(var j=0; j<boxes.length; j++){
+            boxes[j].removeEventListener('click',myfunction);
+            boxes[j].classList.add("disabled");
+        }
+        //delay call
+        setTimeout(() => {  computer(); }, 2000);
+    }
+    var computer = function(){
+        var values = [];
+        //Remove CLICK event from other boxes
+        for(var j=0; j<boxes.length; j++){
+            value = Number(boxes[j].textContent);
+            values.push(value);
+        }
+        //Main LOGIC
+        //1.generate nim-sum
+        //2.take x = floor(log base2 of nim-usm)
+        //3.2^x gives the leftmost bit;
+        //4.find value with leftmost bit set
+        //5.XOR to flip bits towards right 
+        var nimsum = 0;
+        for(var i=0; i<boxes.length; i++){
+            nimsum = nimsum^values[i];
+        }
+        var pow = Math.floor(Math.log(nimsum)/Math.log(2));
+        var leftmostbit = 1<<pow;
+        
+        //step 4
+        var index = -1;
+        for(var i=0; i<boxes.length; i++){
+            if(values[i]&leftmostbit){
+                //leftmostbit is set
+                index = i;
+                var newValue = values[index]^nimsum;
+                break;
+            }
+        }
+        if(index == -1){
+            for(var i=0; i<boxes.length; i++){
+                if(values[i] != 0)
+                    index = i;    
+            }
+            var newValue = 0;    
+        }
+        //we have the index of the box to be changed
+        
+        boxes[index].innerHTML = "<h1 class='w-100'>"+newValue+"</h1>";
+        for(var k=0; k < newValue; k++){
+            boxes[index].innerHTML += "<img class='stones' src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsfvEXPd5ZHTRLwVbtw2MZ9T3Tzp37-Gy8i2dH8ZYqIRRAGcOD&usqp=CAU'>"
+        }
+        if(newValue == 0){
+            boxes[index].classList.add("zero");
+            count = count-1;
+            boxes[index].removeEventListener('click',myfunction);
+        }
+        placed = true;
+        submit();
+    }
+    
+    var presubmit = function(){
+        if(placed)
+            submit();
+        else
+            alert("Atleast 1 stone must be removed");
+    }
+    
+    var submit = function(){
+                    if(player.textContent == "Your turn")
+                        currPlayer = 1;
+                    else
+                        currPlayer = 2;
+                    //Check gameover?
+                    if(count == 0)
+                        gameOver(currPlayer);
+
+                    //toggle players
+                    if(currPlayer == 1)
+                        player.textContent = "Computer's turn";
+                    else
+                        player.textContent = "Your turn";
+                    placed = false;
+                    player.classList.toggle("player1");
+                    player.classList.toggle("player2");
+                    for(var j=0; j<boxes.length; j++){
+                        if(Number(boxes[j].textContent) !=0)
+                            boxes[j].addEventListener('click',myfunction);
+                        boxes[j].classList.remove("disabled");
+                    }
+                    if(currPlayer == 1)
+                        turn2();
+                    if(currPlayer == 2){
+                        //add event to button when player1's turn
+                        btn.addEventListener('click', presubmit);
+                    }
+                }
+    
+    var gameover = document.getElementById("gameOver");
+    var boxes = document.getElementsByClassName("box");
+    var btn = document.getElementById("Submit");
+    var player = document.getElementById("player");
+    var count = boxes.length;
+    var gameOver = function(current){
+        if(current == 2)
+            gameover.innerHTML = "<h1>Game Over! You lose!!!</h1>";
+        else
+            gameover.innerHTML = "<h1>Game Over! You Win!!!</h1>";
+            //gameover.innerHTML = "<h1>Game Over! Player "+current+" wins!!!</h1>"
+    }
+
+    //initial event listeners
+    for(var i=0; i<boxes.length; i++){
+        boxes[i].addEventListener('click',myfunction);
+    };
+    btn.addEventListener('click', presubmit);
+    
+
+</script>

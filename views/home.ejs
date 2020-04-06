@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%- include("partials/cdns.ejs") %>
+        <%- include("partials/style.ejs") %>
+        <title>Game Of NIM</title>
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-dark fixed-top bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">Game of Nim</a>
+                <a class="text-white">Rules</a>
+            </div>
+        </nav>
+        <div class="text-center">
+            <h1>Player1 Vs Player2</h1>
+            <p>RULES:</p>
+            <p>1)Each player may remove any number of stones (at least one) from any one pile, and it is fine to take a whole pile</p>
+            <p>2)The player removing the last stone left wins.</p>
+        </div>
+        <div class="container bg-info p-3">
+            <div class="row justify-content-around">
+                <% for(var i=0; i<len; i++){%>
+                    <div class="col-md-6 d-flex">
+                        <div class="mb-3 row box w-100 mx-auto justify-content-around">
+                            <h1 class="w-100"><%= value[i]%></h1>
+                            <% for(var j=0; j<value[i]; j++) {%>
+                                <img class="stones" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsfvEXPd5ZHTRLwVbtw2MZ9T3Tzp37-Gy8i2dH8ZYqIRRAGcOD&usqp=CAU">
+                            <%}%>
+                        </div>
+                    </div>
+                <%}%>
+            </div>
+            <div id="gameOver" class="text-center bg-dark text-white pb-3 mb-2">
+                <h1 id="player">Your turn</h1>
+                <a id="Submit" class="btn btn-primary w-50 text-white">Done</a>
+            </div>
+        </div>
+        <%- include("partials/script.ejs") %>
+    </body>
+</html>
