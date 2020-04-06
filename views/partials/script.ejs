@@ -1,5 +1,7 @@
 <script>
     var placed = false;
+    var checkedOptimalSol = false;
+    var noOptimalsol = false;
     var currPlayer = 1;
     var myfunction = function(){
                         //Remove CLICK event from other boxes
@@ -27,7 +29,12 @@
                             }
                         }
                     }
+
+
     var turn2 = function(){
+        optimalObj = computer();
+        // noOptsol();
+
         //Remove the button
         btn.removeEventListener('click', presubmit);
         //Remove CLICK event from other boxes
@@ -36,8 +43,24 @@
             boxes[j].classList.add("disabled");
         }
         //delay call
-        setTimeout(() => {  computer(); }, 2000);
+        setTimeout(() => {  
+            var index = optimalObj.index;
+            var newValue = optimalObj.newValue;
+            boxes[index].innerHTML = "<h1 class='w-100'>"+newValue+"</h1>";
+            for(var k=0; k < newValue; k++){
+                boxes[index].innerHTML += "<img class='stones' src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsfvEXPd5ZHTRLwVbtw2MZ9T3Tzp37-Gy8i2dH8ZYqIRRAGcOD&usqp=CAU'>"
+            }
+            if(newValue == 0){
+                boxes[index].classList.add("zero");
+                count = count-1;
+                boxes[index].removeEventListener('click',myfunction);
+            }
+            placed = true;
+            submit();
+         }, 2000);
     }
+
+
     var computer = function(){
         var values = [];
         //Remove CLICK event from other boxes
@@ -73,21 +96,16 @@
                 if(values[i] != 0)
                     index = i;    
             }
-            var newValue = 0;   
+            var newValue = 0;
+            if(currPlayer == 2)
+                noOptimalsol = true; 
         }
+        var obj = {index: index,
+                    newValue: newValue
+                };
         //we have the index of the box to be changed
         
-        boxes[index].innerHTML = "<h1 class='w-100'>"+newValue+"</h1>";
-        for(var k=0; k < newValue; k++){
-            boxes[index].innerHTML += "<img class='stones' src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsfvEXPd5ZHTRLwVbtw2MZ9T3Tzp37-Gy8i2dH8ZYqIRRAGcOD&usqp=CAU'>"
-        }
-        if(newValue == 0){
-            boxes[index].classList.add("zero");
-            count = count-1;
-            boxes[index].removeEventListener('click',myfunction);
-        }
-        placed = true;
-        submit();
+        return obj;
     }
     
     var presubmit = function(){
@@ -98,34 +116,41 @@
     }
     
     var submit = function(){
-                    if(player.textContent == "Your turn")
-                        currPlayer = 1;
-                    else
-                        currPlayer = 2;
-                    //Check gameover?
-                    if(count == 0)
-                        gameOver(currPlayer);
+        if(player.textContent == "Your turn")
+            currPlayer = 1;
+        else
+            currPlayer = 2;
+        
+        optimalObj = computer();
+        //Check gameover?
+        if(count == 0)
+            gameOver(currPlayer);
 
-                    //toggle players
-                    if(currPlayer == 1)
-                        player.textContent = "Computer's turn";
-                    else
-                        player.textContent = "Your turn";
-                    placed = false;
-                    player.classList.toggle("player1");
-                    player.classList.toggle("player2");
-                    for(var j=0; j<boxes.length; j++){
-                        if(Number(boxes[j].textContent) !=0)
-                            boxes[j].addEventListener('click',myfunction);
-                        boxes[j].classList.remove("disabled");
-                    }
-                    if(currPlayer == 1)
-                        turn2();
-                    if(currPlayer == 2){
-                        //add event to button when player1's turn
-                        btn.addEventListener('click', presubmit);
-                    }
-                }
+        //toggle players
+        if(currPlayer == 1){
+            btn.classList.add("d-none");
+            player.textContent = "Computer's turn";
+        }
+        else{
+            noOptsol();
+            btn.classList.remove("d-none");
+            player.textContent = "Your turn";
+        }
+        placed = false;
+        player.classList.toggle("player1");
+        player.classList.toggle("player2");
+        for(var j=0; j<boxes.length; j++){
+            if(Number(boxes[j].textContent) !=0)
+                boxes[j].addEventListener('click',myfunction);
+            boxes[j].classList.remove("disabled");
+        }
+        if(currPlayer == 1)
+            turn2();
+        if(currPlayer == 2){
+            //add event to button when player1's turn
+            btn.addEventListener('click', presubmit);
+        }
+    }
     
     var gameover = document.getElementById("gameOver");
     var boxes = document.getElementsByClassName("box");
@@ -133,11 +158,15 @@
     var player = document.getElementById("player");
     var count = boxes.length;
     var gameOver = function(current){
-        if(current == 2)
-            gameover.innerHTML = "<h1>Game Over! You lose!!!</h1>";
-        else
-            gameover.innerHTML = "<h1>Game Over! You Win!!!</h1>";
-            //gameover.innerHTML = "<h1>Game Over! Player "+current+" wins!!!</h1>"
+        if(checkedOptimalSol){
+            gameover.innerHTML = "<h1>Sorry, you checked optimal sol.</h1>";
+        }else{
+            if(current == 2)
+                gameover.innerHTML = "<h1>Game Over! You lose!!!</h1>";
+            else
+                gameover.innerHTML = "<h1>Game Over! You Win!!!</h1>";
+                //gameover.innerHTML = "<h1>Game Over! Player "+current+" wins!!!</h1>"
+        }
     }
 
     //initial event listeners
@@ -145,4 +174,20 @@
         boxes[i].addEventListener('click',myfunction);
     };
     btn.addEventListener('click', presubmit);
+    var optsol = document.getElementById("optimalSol");
+    var optbtn = document.getElementById("optimalButton");
+    optbtn.addEventListener('click',function(){
+        optsol.classList.remove("d-none");
+        optbtn.classList.add("d-none");
+        checkedOptimalSol = true;
+    })
+    var optimalObj = computer();
+
+    var noOptsol = function(){
+        if(!noOptimalsol)
+            optsol.innerHTML = "<h3>Remove stones from Pile: "+Number(optimalObj.index+1)+" and make it "+optimalObj.newValue+"</h3>";
+        else
+            optsol.innerHTML = "<h3>Sorry, the game is out of your hand</h3>";
+    }
+    noOptsol();
 </script>
