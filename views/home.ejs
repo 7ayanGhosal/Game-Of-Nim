@@ -12,59 +12,64 @@
                 <a class="navbar-brand" href="/">Game of NIM</a>
             </div>
         </nav>
-        <div class="text-center">
-            <div class="rules container">
-                <hr>
-                <h2 class="bold">RULES:</h2>
-                <h5 class="text-left">1)In each turn, a player may remove any number of stones (at least one) from any one pile, and it is fine to take a whole pile</h5>
-                <h5 class="text-left">2)The player removing the last stone left wins.</h5>
-                <hr>
-                <h2 class="bold">How to play:</h2>
-                <h5 class="text-left">A)Just click on the pile of stones to remove a stone from it(You may click multiple times in one turn)</h5>
-                <h5 class="text-left">B)Don't forget to press the "Done" button after you completed your turn</h5>
-                <hr>
-                <h5 class="text-left bold">You may see the optimal solutions if you find it difficult to win</h5>
-                <hr>
+        <div class="container main">
+            <div class="text-center">
+                <div class="rules">
+                    <hr>
+                    <h2 class="bold">RULES:</h2>
+                    <h5 class="text-left">1)In each turn, a player may remove any number of stones (at least one) from any one pile, and it is fine to take a whole pile</h5>
+                    <h5 class="text-left">2)The player removing the last stone left wins.</h5>
+                    <hr>
+                    <h2 class="bold">How to play:</h2>
+                    <h5 class="text-left">A)Just click on the pile of stones to remove a stone from it(You may click multiple times in one turn)</h5>
+                    <h5 class="text-left">B)Don't forget to press the "Done" button after you completed your turn</h5>
+                    <hr>
+                    <h5 class="text-left bold">You may see the optimal solutions if you find it difficult to win</h5>
+                    <hr>
+                </div>
             </div>
-        </div>
-        <div class="container game-area p-3 text-center">
-            <div class="row justify-content-around align-items-center d-flex">
-                <% for(var i=0; i<len; i++){%>
-                    <div class="col-6 d-flex">
-                        <div class="mb-3 row w-100 mx-auto justify-content-around d-flex">
-                            <div class="box w-100">
-                                <h1 class="box-value"><%= value[i]%></h1>
-                                <% for(var j=0; j<value[i]; j++) {%>
-                                    <img class="stones" src="https://pngimg.com/uploads/stone/stone_PNG13596.png">
-                                <%}%>
+            <div class="game-area p-3 text-center">
+                <div class="row justify-content-around align-items-center d-flex">
+                    <% for(var i=0; i<len; i++){%>
+                        <div class="col-6 d-flex">
+                            <div class="mb-3 row w-100 mx-auto justify-content-around d-flex">
+                                <div class="box w-100">
+                                    <div>
+                                        <h1 class="box-value"><%= value[i]%></h1>
+                                    </div>
+                                    <% for(var j=0; j<value[i]; j++) {%>
+                                        <img class="stones" src="https://pngimg.com/uploads/stone/stone_PNG13596.png">
+                                    <%}%>
+                                    <% for(var j=0; j<(9-value[i]); j++) {%>
+                                        <img class="fake-stone"></img>
+                                    <%}%>
+                                </div>
+                                <h3 class="mt-2 bold">Pile-<%= i+1 %></h3>
                             </div>
-                            <h3 class="mt-2 bold">Pile-<%= i+1 %></h3>
                         </div>
-                    </div>
-                <%}%>
+                    <%}%>
+                </div>
+                <div id="gameOver" class="text-center p-3 mb-2">
+                    <h1 id="player">Your turn</h1>
+                    <a id="Submit" class="btn btn-primary w-50 text-white">Done</a>
+                </div>
+                <button id="optimalButton" class="btn btn-success">Check Optimal Solutions for remaining steps?</button>
+                <div id="optimalSol" class="d-none"></div>
             </div>
-            <div id="gameOver" class="text-center text-white p-3 mb-2">
-                <h1 id="player">Your turn</h1>
-                <a id="Submit" class="btn btn-primary w-50 text-white">Done</a>
-            </div>
-            <button id="optimalButton" class="btn btn-success">Check Optimal Solutions for remaining steps?</button>
-            <div id="optimalSol" class="d-none"></div>
         </div>
         <div class="footer bg-dark">
-            <div class="container">
-                <div class="row d-flex justify-content-around p-4">
-                    <div class="col-lg-6 col-12 text-center">
-                        <p class="text-white">For more informations on Game Of Nim, refer to these links: </p>
-                    </div>
-                    <div class="col-lg-1 col-md-3 col-2 text-center">
-                        <a href="https://en.wikipedia.org/wiki/Nim" target="_blank" class="icon m-0"><i class="fab fa-wikipedia-w"></i></a>
-                    </div>
-                    <div class="col-lg-1 col-md-3 col-2 text-center">
-                        <a href="https://www.youtube.com/watch?v=Kg1-x26NRo8" target="_blank" class="icon m-0"><i class="fab fa-youtube"></i></a>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-8 text-center">
-                        <a href="https://www.geeksforgeeks.org/combinatorial-game-theory-set-2-game-nim/" target="_blank" class="icon m-0">GeeksforGeeks</a> 
-                    </div>
+            <div class="row d-flex justify-content-around p-4 w-100">
+                <div class="col-lg-6 col-12 text-center">
+                    <p class="text-white">For more informations on Game Of Nim, refer to these links: </p>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-2 text-center">
+                    <a href="https://en.wikipedia.org/wiki/Nim" target="_blank" class="icon m-0"><i class="fab fa-wikipedia-w"></i></a>
+                </div>
+                <div class="col-lg-1 col-sm-3 col-2 text-center">
+                    <a href="https://www.youtube.com/watch?v=Kg1-x26NRo8" target="_blank" class="icon m-0"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="col-lg-4 col-sm-6 col-8 text-center">
+                    <a href="https://www.geeksforgeeks.org/combinatorial-game-theory-set-2-game-nim/" target="_blank" class="icon m-0">GeeksforGeeks</a> 
                 </div>
             </div>
         </div>

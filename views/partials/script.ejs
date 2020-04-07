@@ -17,9 +17,12 @@
                         if(value != 0){
                             placed = true;
                             value = value - 1;
-                            this.innerHTML = "<h1 class='box-value'>"+value+"</h1>";
+                            this.innerHTML = "<div><h1 class='box-value'>"+value+"</h1></div>";
                             for(var k=0; k < value; k++){
                                 this.innerHTML += "<img class='stones' src='https://pngimg.com/uploads/stone/stone_PNG13596.png'>"
+                            }
+                            for(var j=0; j<(9-value); j++) {
+                                this.innerHTML += "<img class='fake-stone'></img>";
                             }
                             if(value == 0){
                                 this.classList.add("zero");
@@ -30,7 +33,7 @@
                         }
                     }
 
-
+    //Computers turn
     var turn2 = function(){
         optimalObj = computer();
         // noOptsol();
@@ -43,12 +46,16 @@
             boxes[j].classList.add("disabled");
         }
         //delay call
+        var index = optimalObj.index;
+        var newValue = optimalObj.newValue;
+        boxes[index].classList.add("blink");
         setTimeout(() => {  
-            var index = optimalObj.index;
-            var newValue = optimalObj.newValue;
-            boxes[index].innerHTML = "<h1 class='box-value'>"+newValue+"</h1>";
+            boxes[index].innerHTML = "<div><h1 class='box-value'>"+newValue+"</h1><div>";
             for(var k=0; k < newValue; k++){
                 boxes[index].innerHTML += "<img class='stones' src='https://pngimg.com/uploads/stone/stone_PNG13596.png'>"
+            }
+            for(var j=0; j<(9-newValue); j++) {
+                boxes[index].innerHTML += "<img class='fake-stone'></img>";
             }
             if(newValue == 0){
                 boxes[index].classList.add("zero");
@@ -56,10 +63,12 @@
                 boxes[index].removeEventListener('click',myfunction);
             }
             placed = true;
+            boxes[index].classList.remove("blink");
             submit();
          }, 2000);
     }
 
+    //function to calculate optimal sol
     var computer = function(){
         var values = [];
         //Remove CLICK event from other boxes
@@ -185,7 +194,7 @@
 
     var noOptsol = function(){
         if(!noOptimalsol)
-            optsol.innerHTML = "<h3>Remove stones from Pile: "+Number(optimalObj.index+1)+" and make it "+optimalObj.newValue+"</h3>";
+            optsol.innerHTML = "<h3>Remove stones from Pile-"+Number(optimalObj.index+1)+" and make it "+optimalObj.newValue+"</h3>";
         else
             optsol.innerHTML = "<h3>Sorry, the game is out of your hand</h3>";
     }

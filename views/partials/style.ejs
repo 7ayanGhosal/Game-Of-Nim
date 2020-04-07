@@ -1,6 +1,6 @@
 <style type="text/css">
     @media only screen and (max-width: 767px) {
-        .stones{
+        .stones,.fake-stone{
             width: 50px;
             height: 50px;
             margin: 3px;
@@ -20,7 +20,7 @@
         }
     }
     @media only screen and (max-width: 600px) {
-        .stones{
+        .stones,.fake-stone{
             width: 30px;
             height: 30px;
             margin: 2px;
@@ -36,7 +36,7 @@
         }
     }
     @media only screen and (min-width: 768px) {
-        .stones{
+        .stones,.fake-stone{
             width: 80px;
             height: 80px;
             margin: 5px;
@@ -52,6 +52,9 @@
             font-size: 3rem;
             font-weight: 800;
         }
+    }
+    .fake-stone{
+        opacity: 0;
     }
     *{
         font-family: 'Fira Sans', sans-serif;
@@ -88,17 +91,17 @@
         height:1.5em;
     }
     .disabled{
-        background-color: peachpuff;
+        opacity: 0.6;
     }
     .zero{
         background-color: peachpuff;
     }
-    .player2{
+    /* .player2{
         color: orange;
-    }
+    } */
     #gameOver{
         border-radius: 25px;
-        background-color: darkturquoise;
+        /* background-color: darkturquoise; */
     }
     .icon{
         font-size: 2em;
@@ -110,5 +113,9 @@
     .footer p{
         color: lightblue;
         font-size: 1.2em;
+    }
+    .blink{
+        background-color: gold;
+        opacity: 1;
     }
 </style>
