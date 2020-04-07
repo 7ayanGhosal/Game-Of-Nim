@@ -118,15 +118,44 @@
         color: lightblue;
         font-size: 1.2em;
     }
-    .blink{
-        background-color: gold;
-        opacity: 1;
-    }
-
     /* hr */
     hr.style-two {
         border: 0;
         height: 1px;
         background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+    /* play agin blinking effect */
+    .blinking{
+        animation:blinkingText 1.2s infinite;
+    }
+    @keyframes blinkingText{
+        0%{     color: blue;    }
+        49%{    color: blue; }
+        60%{    color: transparent; }
+        99%{    color:transparent;  }
+        100%{   color: blue;    }
+    }
+    /* computer turn box background blinking effect */
+    .blink{
+        animation:blinkingbackground 1s infinite;
+        opacity: 1;
+    }
+    @keyframes blinkingbackground{
+        0%{     background-color: gold;    }
+        49%{    background-color: gold; }
+        60%{    background-color: transparent; }
+        99%{    background-color:transparent;  }
+        100%{   background-color: gold;    }
+    }
+    /* blinking effect on text for computers turn*/
+    .player2{
+        animation:blinkingText 1s infinite;
+    }
+    @keyframes blinkingText{
+        0%{     color: gold;}
+        49%{    color: gold;       
+        60%{    color: transparent; }
+        99%{    color:transparent;}
+        100%{   color: gold;}
     }
 </style>

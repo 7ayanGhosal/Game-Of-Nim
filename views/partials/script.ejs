@@ -65,7 +65,7 @@
             placed = true;
             boxes[index].classList.remove("blink");
             submit();
-         }, 3000);
+         }, 2500);
     }
 
     //function to calculate optimal sol
@@ -145,7 +145,7 @@
             player.textContent = "Your turn";
         }
         placed = false;
-        player.classList.toggle("player1");
+        // player.classList.toggle("player1");
         player.classList.toggle("player2");
         for(var j=0; j<boxes.length; j++){
             if(Number(boxes[j].textContent) !=0)
@@ -175,7 +175,7 @@
                 gameover.innerHTML = "<h1>Welldone! You Win!!!</h1>";
             //gameover.innerHTML = "<h1>Game Over! Player "+current+" wins!!!</h1>"
         }
-        gameover.innerHTML += "<a href='/'><h2>Click to Play again</h2></a>";
+        gameover.innerHTML += "<a href='/' class='blinking'><h2>Click to Play again</h2></a>";
         optsol.classList.add("d-none");
     }
 
