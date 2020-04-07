@@ -65,7 +65,7 @@
             placed = true;
             boxes[index].classList.remove("blink");
             submit();
-         }, 2000);
+         }, 3000);
     }
 
     //function to calculate optimal sol
@@ -196,7 +196,7 @@
         if(!noOptimalsol)
             optsol.innerHTML = "<h3>Remove stones from Pile-"+Number(optimalObj.index+1)+" and make it "+optimalObj.newValue+"</h3>";
         else
-            optsol.innerHTML = "<h3>Sorry, the game is out of your hand</h3>";
+            optsol.innerHTML = "<h3>Sorry, you can't win this game anymore ... try again by reloading this page</h3>";
     }
     noOptsol();
 </script>
